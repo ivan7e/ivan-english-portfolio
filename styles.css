@@ -18,11 +18,13 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at 20% 10%, rgba(139, 92, 246, 0.2), transparent 32%),
     radial-gradient(circle at 80% 0%, rgba(56, 189, 248, 0.14), transparent 30%),
@@ -55,6 +57,11 @@ body::after {
   border-radius: 999px;
   background: radial-gradient(circle, rgba(247, 191, 79, 0.16), transparent 64%);
   pointer-events: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 a {
@@ -98,6 +105,7 @@ p {
   place-items: center;
   width: 44px;
   height: 44px;
+  flex: 0 0 44px;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
   color: white;
@@ -109,6 +117,12 @@ nav {
   align-items: center;
   gap: 4px;
   overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: none;
+}
+
+nav::-webkit-scrollbar {
+  display: none;
 }
 
 nav a {
@@ -144,7 +158,7 @@ footer {
 .hero {
   min-height: calc(100vh - 86px);
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.62fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.62fr);
   gap: clamp(30px, 7vw, 86px);
   align-items: center;
   padding: 80px 0 56px;
@@ -152,6 +166,7 @@ footer {
 
 .hero-copy {
   position: relative;
+  min-width: 0;
 }
 
 .hero-copy::before {
@@ -181,9 +196,10 @@ footer {
 
 h1 {
   margin-bottom: 8px;
-  font-size: clamp(54px, 10vw, 118px);
-  line-height: 0.88;
+  font-size: clamp(48px, 9vw, 118px);
+  line-height: 0.9;
   letter-spacing: 0;
+  overflow-wrap: break-word;
 }
 
 .hero-copy h2 {
@@ -626,7 +642,9 @@ footer a {
   gap: 14px;
 }
 
+/* Tablet */
 @media (max-width: 860px) {
+
   .hero,
   .about-grid,
   .project-card.featured {
@@ -639,6 +657,7 @@ footer a {
   }
 
   .hero {
+    min-height: auto;
     padding-top: 54px;
   }
 
@@ -646,20 +665,73 @@ footer a {
   .profile-card img {
     min-height: 430px;
   }
+
+  .profile-card {
+    transform: none;
+  }
 }
 
+/* Mobile */
 @media (max-width: 680px) {
+
+  .hero,
+  .section,
+  .contact,
+  footer {
+    width: min(100% - 20px, 1120px);
+  }
+
   .site-header {
     position: static;
+    width: calc(100% - 20px);
     align-items: flex-start;
     flex-direction: column;
     border-radius: 22px;
+    margin-top: 10px;
   }
 
   nav {
     width: 100%;
+    padding-bottom: 4px;
   }
 
+  nav a {
+    font-size: 13px;
+    padding: 0 12px;
+  }
+
+  .hero {
+    padding: 40px 0 44px;
+    gap: 26px;
+  }
+
+  .hero-copy::before {
+    width: 120px;
+    height: 120px;
+    top: -18px;
+    left: -12px;
+  }
+
+  h1 {
+    font-size: clamp(42px, 13vw, 64px);
+    line-height: 1;
+  }
+
+  .hero-copy h2 {
+    font-size: clamp(22px, 7vw, 28px);
+    line-height: 1.1;
+  }
+
+  .hero-title-stack span:last-child {
+    font-size: clamp(18px, 5vw, 24px);
+  }
+
+  .hero-copy p,
+  p {
+    font-size: 16px;
+  }
+
+  .credential-strip,
   .tech-grid,
   .small-project-grid,
   .cert-list,
@@ -667,17 +739,84 @@ footer a {
     grid-template-columns: 1fr;
   }
 
-  .credential-strip {
+  .credential-strip div,
+  .tech-grid article,
+  .project-card,
+  .cert-list article,
+  .process-grid article {
+    padding: 20px;
+  }
+
+  .section {
+    padding: 56px 0;
+  }
+
+  .section h2,
+  .contact h2 {
+    font-size: clamp(30px, 10vw, 44px);
+  }
+
+  .project-card.featured {
     grid-template-columns: 1fr;
   }
 
+  .project-visual {
+    min-height: 180px;
+  }
+
+  .profile-card,
+  .profile-card img {
+    min-height: 320px;
+  }
+
+  .profile-card figcaption {
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+  }
+
+  .profile-card strong {
+    font-size: 24px;
+  }
+
+  .button {
+    width: 100%;
+  }
+
   .contact {
-    padding: 28px;
+    margin-top: 30px;
+    margin-bottom: 44px;
+    padding: 26px;
   }
 
   footer {
     align-items: flex-start;
     flex-direction: column;
     padding: 28px 0;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 390px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  .hero-copy h2 {
+    font-size: 22px;
+  }
+
+  .profile-card,
+  .profile-card img {
+    min-height: 280px;
+  }
+
+  .credential-strip div,
+  .tech-grid article,
+  .project-card,
+  .cert-list article,
+  .process-grid article,
+  .contact {
+    padding: 18px;
   }
 }
