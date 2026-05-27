@@ -161,6 +161,20 @@ h1 {
   line-height: 1.05;
 }
 
+.hero-title-stack {
+  display: grid;
+  gap: 8px;
+}
+
+.hero-title-stack span {
+  display: block;
+}
+
+.hero-title-stack span:last-child {
+  color: var(--text);
+  font-size: clamp(20px, 2.3vw, 30px);
+}
+
 .hero-copy p {
   max-width: 680px;
   font-size: 18px;
