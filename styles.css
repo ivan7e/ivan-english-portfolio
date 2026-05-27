@@ -620,6 +620,12 @@ footer a {
   font-weight: 900;
 }
 
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
 @media (max-width: 860px) {
   .hero,
   .about-grid,
